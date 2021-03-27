@@ -10,7 +10,7 @@ export default new Vuex.Store({
     playerPoints2: 100
   },
 
-  actions: {
+  mutations: {
     SET_PLAYER_1(state, payload) {
       state.playerPoints1 = payload;
     },

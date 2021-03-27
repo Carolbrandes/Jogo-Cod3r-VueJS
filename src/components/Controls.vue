@@ -15,11 +15,8 @@ export default {
     methods: {
         ataque() {
             console.log("Ataque")
-            let novoValor1 = this.$store.state.playerPoints1 > 0 && this.$store.state.playerPoints1 - Math.random()
-            let novoValor2 = this.$store.state.playerPoints2 > 0 && this.$store.state.playerPoints2 - Math.random()
-
-            console.log(novoValor1)
-            console.log(novoValor2)
+            let novoValor1 = this.$store.state.playerPoints1 > 0 && Math.floor(this.$store.state.playerPoints1 - Math.random() * Math.random())
+            let novoValor2 = this.$store.state.playerPoints2 > 0 && Math.floor(this.$store.state.playerPoints2 - Math.random() * Math.random())
 
             this.$store.commit("SET_PLAYER_1", novoValor1)
             this.$store.commit("SET_PLAYER_2", novoValor2)
