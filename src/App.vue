@@ -1,10 +1,12 @@
 <template>
     <div id="app">
         <div class="player-area">
-            <Player name="Pikachu" photo="./static/assets/pikachu-inicio.png" :style="{color: '#FFD700'}" />
+            <Player :points="this.$store.state.playerPoints1" name="Pikachu" photo="./static/assets/pikachu-inicio.png" :style="{color: '#FFD700'}" />
             <p class="players-vs">VS</p>
-            <Player name="Charmander" photo="./static/assets/charmander-inicio.png" :style="{color: '#FF4500'}" />
+            <Player :points="this.$store.state.playerPoints2" name="Charmander" photo="./static/assets/charmander-inicio.png" :style="{color: '#FF4500'}" />
         </div>
+
+        <Controls />
     </div>
 </template>
 
@@ -13,7 +15,9 @@ export default {
     name: 'App',
     components: {
         Player: () =>
-            import ("@/components/Player.vue")
+            import ("@/components/Player.vue"),
+
+        Controls: () => import("@/components/Controls.vue")
     }
 }
 </script>
@@ -28,7 +32,6 @@ export default {
 body {
     min-height: 100vh;
     background-color: #4e0891;
-    overflow: hidden;
 }
 
 #app {
@@ -38,6 +41,7 @@ body {
     text-align: center;
     color: #fff;
     margin-top: 60px;
+    overflow-x: hidden;
 }
 
 .player-area {
@@ -45,6 +49,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100vw;
+    margin-bottom: 2rem;
 }
 
 .players-vs {

@@ -3,13 +3,13 @@
             <div class="progress-bar-wrapper">
                 <div class="progress-bar-control"></div>
             </div>
-            <p :id="id" class="progress-bar-percent">100%</p>
+            <p :id="id" class="progress-bar-percent">{{points}}%</p>
         </div>
 </template>
 
 <script>
 export default {
-  props: ["id"]
+  props: ["id", "points"]
 }
 </script>
 
@@ -27,7 +27,7 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    width: 20%;
+    width: 100%;
     height: 40px;
     background-color: #98FB98;
     border-radius: inherit;
@@ -36,5 +36,6 @@ export default {
 .progress-bar-percent {
     color: #fff;
     font-size: 1.2rem;
+    font-weight: bold;
 }
 </style>

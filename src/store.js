@@ -8,5 +8,15 @@ export default new Vuex.Store({
   state: {
     playerPoints1: 100,
     playerPoints2: 100
+  },
+
+  actions: {
+    SET_PLAYER_1(state, payload) {
+      state.playerPoints1 = payload;
+    },
+
+    SET_PLAYER_2(state, payload) {
+      state.playerPoints2 = payload;
+    }
   }
 });

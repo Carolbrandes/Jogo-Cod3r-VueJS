@@ -6,13 +6,13 @@
             </div>
             <h4 :style="style">{{name}}</h4>
         </div>
-       <ProgressiveBar :id="`progress_${name}`"/>
+       <ProgressiveBar :id="`progress_${name}`" :points="points"/>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["name", "photo", "style"],
+    props: ["name", "photo", "style", "points"],
     components: {
       ProgressiveBar: () => import("@/components/ProgressiveBar.vue")
     }
