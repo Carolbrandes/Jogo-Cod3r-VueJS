@@ -2,11 +2,11 @@
     <div class="btn-wrapper">
         <button class="btn btn-ataque" type="button" @click="ataque">Ataque</button>
 
-        <button class="btn btn-ataque-especial" type="button">Ataque Especial</button>
+        <button class="btn btn-ataque-especial" type="button" @click="ataqueEspecial">Ataque Especial</button>
 
-        <button class="btn btn-curar" type="button">Curar</button>
+        <button class="btn btn-curar" type="button" @click="curar">Curar</button>
 
-        <button class="btn btn-desistir" type="button">Desistir</button>
+        <button class="btn btn-desistir" type="button" @click="desistir">Desistir</button>
     </div>
 </template>
 
@@ -15,11 +15,33 @@ export default {
     methods: {
         ataque() {
             console.log("Ataque")
-            let novoValor1 = this.$store.state.playerPoints1 > 0 && Math.floor(this.$store.state.playerPoints1 - Math.random() * Math.random())
-            let novoValor2 = this.$store.state.playerPoints2 > 0 && Math.floor(this.$store.state.playerPoints2 - Math.random() * Math.random())
+            let novoValor1 = this.$store.state.playerPoints1 > 0 && Math.floor(this.$store.state.playerPoints1 - Math.random() * (Math.random() - 3) - 3)
+            let novoValor2 = this.$store.state.playerPoints2 > 0 && Math.floor(this.$store.state.playerPoints2 - Math.random() * (Math.random() - 3) - 3)
 
             this.$store.commit("SET_PLAYER_1", novoValor1)
             this.$store.commit("SET_PLAYER_2", novoValor2)
+        },
+
+        ataqueEspecial() {
+            let novoValor1 = this.$store.state.playerPoints1 > 0 && Math.floor(this.$store.state.playerPoints1 - Math.random() * (Math.random() - 5) - 5)
+            let novoValor2 = this.$store.state.playerPoints2 > 0 && Math.floor(this.$store.state.playerPoints2 - Math.random() * (Math.random() - 5) - 5)
+
+            this.$store.commit("SET_PLAYER_1", novoValor1)
+            this.$store.commit("SET_PLAYER_2", novoValor2)
+        },
+
+        curar() {
+            console.log("curar")
+            let novoValor1 = this.$store.state.playerPoints1 > 0 && this.$store.state.playerPoints1 < 100 && Math.floor(this.$store.state.playerPoints1 + Math.random() * (Math.random() + 3) + 3)
+            let novoValor2 = this.$store.state.playerPoints2 > 0 && this.$store.state.playerPoints1 < 100 && Math.floor(this.$store.state.playerPoints2 + Math.random() * (Math.random() + 3) + 3)
+
+            this.$store.commit("SET_PLAYER_1", novoValor1)
+            this.$store.commit("SET_PLAYER_2", novoValor2)
+        },
+
+        desistir() {
+            this.$store.commit("SET_PLAYER_1", 100)
+            this.$store.commit("SET_PLAYER_2", 100)
         }
     }
 }
