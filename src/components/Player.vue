@@ -7,14 +7,17 @@
             <h4 :style="style">{{name}}</h4>
         </div>
        <ProgressiveBar :id="`progress_${name}`" :points="points"/>
+
+       <Control :alvo="alvo" :jogador="jogador" />
     </div>
 </template>
 
 <script>
 export default {
-    props: ["name", "photo", "style", "points"],
+    props: ["name", "photo", "style", "points", "alvo", "jogador"],
     components: {
-      ProgressiveBar: () => import("@/components/ProgressiveBar.vue")
+      ProgressiveBar: () => import("@/components/ProgressiveBar.vue"),
+      Control: () => import("@/components/Control.vue")
     }
 }
 </script>
@@ -49,6 +52,8 @@ export default {
 .player-card img {
     width: 100%;
     display: block;
+    position: relative;
+    left: 25px;
 }
 
 .player-card h4 {

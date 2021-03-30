@@ -1,7 +1,7 @@
 <template>
    <div class="progress-bar">
             <div class="progress-bar-wrapper">
-                <div class="progress-bar-control"></div>
+                <div class="progress-bar-control" :style="{width: `${points}%`}"></div>
             </div>
             <p :id="id" class="progress-bar-percent">{{points}}%</p>
         </div>
