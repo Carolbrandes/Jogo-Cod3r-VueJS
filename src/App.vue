@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="player-area">
-            <Player :points="this.$store.state.playerPoints1" name="Pikachu" photo="./static/assets/pikachu-inicio.png" :style="{color: '#FFD700'}" alvo="jogador2" :jogador="jogador1" />
+            <Player :points="this.$store.state.playerPoints1" name="Pikachu" photo="./static/assets/pikachu-inicio.png" :style="{color: '#FFD700'}" alvo="jogador2" jogador="jogador1" />
 
             <div>
                 <p class="players-vs">VS</p>
@@ -9,7 +9,7 @@
                 <ScoreBoard />
             </div>
 
-            <Player :points="this.$store.state.playerPoints2" name="Charmander" photo="./static/assets/charmander-inicio.png" :style="{color: '#FF4500'}" alvo="jogador1" :jogador="jogador2" />
+            <Player :points="this.$store.state.playerPoints2" name="Charmander" photo="./static/assets/charmander-inicio.png" :style="{color: '#FF4500'}" alvo="jogador1" jogador="jogador2" />
         </div>
     </div>
 </template>
