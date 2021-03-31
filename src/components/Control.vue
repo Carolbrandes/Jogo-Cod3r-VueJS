@@ -1,14 +1,14 @@
 <template>
     <div class="control">
         <button class="btn btn-ataque" type="button" @click="ataque(jogador)">
-                Ataque
-                </button>
+                        Ataque
+                        </button>
 
-        <button class="btn btn-ataque-especial" type="button">Ataque Especial</button>
+        <button class="btn btn-ataque-especial" type="button" @click="ataqueEspecial(jogador)">Ataque Especial</button>
 
-        <button class="btn btn-curar" type="button">Curar</button>
+        <button class="btn btn-curar" type="button" @click="curar(jogador)">Curar</button>
 
-        <button class="btn btn-desistir" type="button">Desistir</button>
+        <button class="btn btn-desistir" type="button" @click="desistir">Desistir</button>
     </div>
 </template>
 
@@ -18,26 +18,98 @@ export default {
 
 
     methods: {
-       ataque(jogador){
-         if(jogador === "jogador1"){
-           console.log("Jogador 1")
-           let valorAtaque = Math.floor(Math.random() * (10 - 1) + 1)
-           console.log(valorAtaque)
+        ataque(jogador) {
+            if (jogador === "jogador1") {
+                console.log("Jogador 1")
+                let valorAtaque = this.$store.state.playerPoints2 - Math.floor(Math.random() * (5 - 1) + 1)
+                console.log(valorAtaque)
 
-           if(this.$store.state.playerPoints2 > 0){
-             this.$store.commit("SET_PLAYER_2", valorAtaque)
-           }
-         }else{
-           console.log("Jogador 2")
-           let valorAtaque2 = Math.floor(Math.random() * (10 - 1) + 1)
-           console.log(valorAtaque2)
+                if (this.$store.state.playerPoints2 > 0 && valorAtaque >= 0) {
+                    this.$store.commit("SET_PLAYER_2", valorAtaque)
 
-           if(this.$store.state.playerPoints1 > 0){
-             this.$store.commit("SET_PLAYER_1", valorAtaque2)
-           }
-         }
-       }
-    }
+                     this.$store.state.playerPoints1 === 0 || this.$store.state.playerPoints2 === 0 && this.$store.dispatch("defineWinner")
+                }else {
+                    alert("Não foi dessa vez!")
+                }
+
+            } else {
+                console.log("Jogador 2")
+                let valorAtaque2 = this.$store.state.playerPoints1 - Math.floor(Math.random() * (5 - 1) + 1)
+                console.log(valorAtaque2)
+
+                if (this.$store.state.playerPoints1 > 0 && valorAtaque2 >= 0) {
+                    this.$store.commit("SET_PLAYER_1", valorAtaque2)
+
+                    this.$store.state.playerPoints1 === 0 || this.$store.state.playerPoints2 === 0 && this.$store.dispatch("defineWinner")
+                }else {
+                    alert("Não foi dessa vez!")
+                }
+            }
+
+
+        },
+
+        ataqueEspecial(jogador) {
+            if (jogador === "jogador1") {
+                console.log("Jogador 1")
+                let valorAtaque = this.$store.state.playerPoints2 - Math.floor(Math.random() * (10 - 1) + 1) * 4
+                console.log(valorAtaque)
+
+                if (this.$store.state.playerPoints2 > 0 && valorAtaque >= 0) {
+                    this.$store.commit("SET_PLAYER_2", valorAtaque)
+
+                    this.$store.state.playerPoints1 === 0 || this.$store.state.playerPoints2 === 0 && this.$store.dispatch("defineWinner")
+                }else {
+                    alert("Não foi dessa vez!")
+                }
+
+            } else {
+                console.log("Jogador 2")
+                let valorAtaque2 = this.$store.state.playerPoints1 - Math.floor(Math.random() * (10 - 1) + 1) * 4
+                console.log(valorAtaque2)
+
+                if (this.$store.state.playerPoints1 > 0 && valorAtaque2 >= 0) {
+                    this.$store.commit("SET_PLAYER_1", valorAtaque2)
+
+                    this.$store.state.playerPoints1 === 0 || this.$store.state.playerPoints2 === 0 && this.$store.dispatch("defineWinner")
+                }else {
+                    alert("Não foi dessa vez!")
+                }
+                this.$store.state.playerPoints1 === 0 || this.$store.state.playerPoints2 === 0 && this.$store.dispatch("defineWinner")
+            }
+
+
+        },
+
+        curar(jogador) {
+            if (jogador === "jogador1") {
+                console.log("Jogador 1")
+                let valorCura = this.$store.state.playerPoints1 + Math.floor(Math.random() * (10 - 1) + 1) * 4
+                console.log(valorCura)
+
+                if (this.$store.state.playerPoints1 > 0 && this.$store.state.playerPoints1 < 100 && valorCura < 100) {
+                    this.$store.commit("SET_PLAYER_1", valorCura)
+                } else {
+                    alert("Não tem cura pra você agora!")
+                }
+            } else {
+                console.log("Jogador 2")
+                let valorCura2 = this.$store.state.playerPoints2 + Math.floor(Math.random() * (10 - 1) + 1) * 4
+                console.log(valorCura2)
+
+                if (this.$store.state.playerPoints2 > 0 && this.$store.state.playerPoints2 < 100 && valorCura2 < 100) {
+                    this.$store.commit("SET_PLAYER_2", valorCura2)
+                } else {
+                    alert("Não tem cura pra você agora!")
+                }
+            }
+        },
+
+        desistir() {
+            this.$store.commit("SET_PLAYER_1", 100)
+            this.$store.commit("SET_PLAYER_2", 100)
+        }
+    },
 }
 </script>
 
